@@ -3,5 +3,6 @@
     <delay duration="5"/>
     <section/>
     <bullet px="100" py="100" angle="0" velocity="10" imagepath="bone.png" waittime="1"/>
+    <bwallx px="100" angle="0" spacing="75" velocity="10" imagepath="bone.png" waittime="1"/>
     <!-- <line side="top" direction="down" spacing="100" velocity="4"/> -->
 </level>

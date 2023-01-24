@@ -35,11 +35,11 @@ class Player(Entity):
 		if hasCollided == True or hasCollided != None:
 			if self.hp == 0:
 				self.kill()
+				return True
 			self.hp -= 1
 			self.set_image(self.states[self.hp - 1])
 			self.set_angle(self.angle)
 			self.ivd = 2
-		return hasCollided
 	
 	#* Update function for invincibility
 	def update(self, dt):
