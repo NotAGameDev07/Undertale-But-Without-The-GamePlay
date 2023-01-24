@@ -31,8 +31,13 @@ def parse(screen, root=None):
 		#* Bullet wall tag parsing, spawns a bullet wall
 		if i.tag == 'bwallx':
 			spacing = int(i.attrib['spacing'])
-			for spaces in range(-1000, int(windowY / spacing) + 1000):
-				pstring = pstring + f"essg{count}.add(" + addEnemy(int(i.attrib['px']), spaces * spacing + int(i.attrib['offset']), i.attrib['imagepath'], int(i.attrib['velocity']), delay, int(i.attrib['angle']), float(i.attrib['waittime'])) + ")\n"
+			for spaces in range(0, int(windowY / spacing)):
+				pstring = pstring + f"essg{count}.add(" + addEnemy(int(i.attrib['px']), (spaces * spacing + int(i.attrib['offset'])) % windowY, i.attrib['imagepath'], int(i.attrib['velocity']), delay, int(i.attrib['angle']), float(i.attrib['waittime'])) + ")\n"
+		#* Bullet wall tag parsing, spawns a bullet wall
+		if i.tag == 'bwally':
+			spacing = int(i.attrib['spacing'])
+			for spaces in range(0, int(windowX / spacing)):
+				pstring = pstring + f"essg{count}.add(" + addEnemy((spaces * spacing + int(i.attrib['offset'])) % windowX, int(i.attrib['py']), i.attrib['imagepath'], int(i.attrib['velocity']), delay, int(i.attrib['angle']), float(i.attrib['waittime'])) + ")\n"
 		#* Repeat tag parsing, repeats tags inside it
 		if i.tag == 'repeat':
 			for _ in range(int(i.attrib['amount'])):
@@ -44,8 +49,12 @@ def parse(screen, root=None):
 					if j.tag == 'bwallx':
 						j.attrib[i.attrib['prop']] = str(int(j.attrib[i.attrib['prop']]) + int(i.attrib['increment']))
 						spacing = int(j.attrib['spacing'])
-						for spaces in range(-1000, int(windowY / spacing) + 1000):
-							pstring = pstring + f"essg{count}.add(" + addEnemy(int(j.attrib['px']), spaces * spacing + int(j.attrib['offset']), j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
+						for spaces in range(0, int(windowY / spacing)):
+							pstring = pstring + f"essg{count}.add(" + addEnemy(int(j.attrib['px']), (spaces * spacing + int(j.attrib['offset'])) % windowY, j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
+					if i.tag == 'bwally':
+						spacing = int(i.attrib['spacing'])
+						for spaces in range(0, int(windowX / spacing)):
+							pstring = pstring + f"essg{count}.add(" + addEnemy((spaces * spacing + int(j.attrib['offset'])) % windowX, int(j.attrib['py']), j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
 	for i in range(0, count):
 		plstring = plstring + f"essg{i + 1}.update(dt)\n"
 		plstring = plstring + f"essg{i + 1}.draw(screen)\n"

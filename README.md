@@ -44,7 +44,7 @@ PATH_TO_IMAGE is the path to the image the the bullet wall uses
 
 SECONDS is the seconds that the bullet wall waits for before moving
 
-### `<bwally />` is the same as the previous tag except that the axis they go along is X instead of Y
+### `<bwally />` is the same as the previous tag except that the axis they go along is X instead of Y and `py` instead of `px`
 
 ### The `<repeat />` tag is like a for loop for the parser so the tags inside it get repeated, nesting `<repeat />` is NOT supported, delay tags are not affected by this tag
 

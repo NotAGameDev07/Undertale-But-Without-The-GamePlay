@@ -86,6 +86,9 @@ class Entity(pygame.sprite.Sprite):
 	
 	#* Collision detection
 	def collides(self, other):
+		if type(other) != pygame.sprite.Group:
+			if abs(other.px - self.px) > 50 or abs(other.py - self.py) > 50:
+				return False
 		#* Collision with other sprite
 		if type(other) != pygame.sprite.Group:
 			self.boundscheck()
@@ -95,13 +98,15 @@ class Entity(pygame.sprite.Sprite):
 			offset = (other.px - self.px, other.py - self.py)
 			return mask1.overlap(mask2, offset)
 		else:
+			others = []
+			for i in other:
+				if abs(i.px - self.px) < 2 and abs(i.py - self.py) < 2:
+					others.append(i)
 		#* Collision with sprite group
 			mask1 = pygame.mask.from_surface(self.image)
-			other_masks, offsets, overlaps = [], [], []
-			for i in other:
-				other_masks.append(pygame.mask.from_surface(i.image))
-				offsets.append((i.px - self.px, i.py - self.py))
-			for (i, j) in zip(other_masks, offsets):
-				overlaps.append(mask1.overlap(i, j))
+			overlaps = []
+			for i in others:
+				if abs(i.px - self.px) < 2 and abs(i.py - self.py) < 2:
+					overlaps.append(mask1.overlap(pygame.mask.from_surface(i.image), (i.px - self.px, i.py - self.py)))
 			does_overlap = [(i is not None) for i in overlaps]
 			return any(does_overlap), len([i for i in does_overlap if i == True])
