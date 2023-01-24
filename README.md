@@ -15,9 +15,13 @@ X is the duration in seconds
 ```
 
 X is the X position of the bullet
+
 Y is the Y position of the bullet
+
 θ is the angle of the bullet
+
 PATH_TO_IMAGE is the path to the image the the bullet uses
+
 SECONDS is the seconds that the bullet waits for before moving
 
 ###### NOTE: The bullet appears after the combined delay durations of all of the delay tags preceding it
