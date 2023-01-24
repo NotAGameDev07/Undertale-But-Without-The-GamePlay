@@ -34,9 +34,6 @@ level = levelparser.parse(screen)
 
 has_died = False
 
-for i in level:
-	print(i)
-
 exec(level[0])
 
 lastKey = None

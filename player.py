@@ -40,6 +40,7 @@ class Player(Entity):
 			self.set_image(self.states[self.hp - 1])
 			self.set_angle(self.angle)
 			self.ivd = 2
+		return False
 	
 	#* Update function for invincibility
 	def update(self, dt):
