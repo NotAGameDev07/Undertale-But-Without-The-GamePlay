@@ -49,7 +49,7 @@ SECONDS is the seconds that the bullet wall waits for before moving
 ### The `<repeat />` tag is like a for loop for the parser so the tags inside it get repeated, nesting `<repeat />` is NOT supported, delay tags are not affected by this tag
 
 ```xml
-<repeat amount=AMOUNT prop=PROP increment=AMT>
+<repeat amount=AMOUNT prop=PROP,PROP2 increment=AMT,AMT2>
     <bwallx px="100" offset="80" angle="0" spacing="200" velocity="8" imagepath="bone.png" waittime="4"/>
 </repeat>
 ```
@@ -57,3 +57,7 @@ SECONDS is the seconds that the bullet wall waits for before moving
 AMOUNT is the amount of times the inside tag is repeated
 
 PROP is the property to increment or decrement by AMT, AMT increases by AMT AMOUNT times
+
+PROP2, etc is any extra properties you want to increment
+
+AMT, AMT2 is the increment amount for PROP, PROP2, etc...

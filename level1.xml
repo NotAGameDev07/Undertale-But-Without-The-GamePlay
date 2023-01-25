@@ -5,11 +5,11 @@
     <bwally py="120" offset="0" angle="270" spacing="100" velocity="8" imagepath="bone.png" waittime="0.125"/>
     <bwally py="100" offset="0" angle="270" spacing="200" velocity="8" imagepath="bone.png" waittime="0.125"/>
     <bullet px="100" py="100" angle="0" velocity="10" imagepath="bone.png" waittime="1"/>
-    <repeat amount="60" prop="offset" increment="20">
+    <repeat amount="60" prop="velocity,offset" increment="1,20">
         <delay duration="0.125"/>
-        <bwallx px="100" offset="80" angle="0" spacing="200" velocity="8" imagepath="bone.png" waittime="0.125"/>
+        <bwallx px="100" offset="80" angle="0" spacing="400" velocity="8" imagepath="bone.png" waittime="0.125"/>
         <!-- <bwally py="100" offset="480" angle="270" spacing="400" velocity="8" imagepath="bone.png" waittime="0.125"/> -->
-        <bwallx px="1000" offset="80" angle="180" spacing="200" velocity="8" imagepath="bone.png" waittime="0.125"/>
+        <bwallx px="1200" offset="80" angle="180" spacing="400" velocity="8" imagepath="bone.png" waittime="0.125"/>
         <!-- <bwally py="700" offset="480" angle="90" spacing="400" velocity="8" imagepath="bone.png" waittime="0.125"/> -->
     </repeat>
     <!-- <line side="top" direction="down" spacing="100" velocity="4"/> -->
