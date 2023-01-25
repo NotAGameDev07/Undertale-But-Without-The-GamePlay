@@ -35,11 +35,13 @@ level = levelparser.parse(screen)
 
 has_died = False
 
-print(level[0])
+#print(level[0])
 
 exec1 = time.time()
 exec(level[0])
 print("LOADING ENEMIES:", time.time() - exec1, "milliseconds")
+
+has_died = False
 
 lastKey = None
 
@@ -49,8 +51,9 @@ pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
 
 #x.start()
 
+exec(level[1])
+
 while RUN:
-	tprime = time.time()
 	screen.fill(BG)
 
 	#* Gets keys
@@ -65,10 +68,9 @@ while RUN:
 			lastKey = None
 	if lastKey in [pygame.K_DOWN, pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT]:
 		player(lastKey)
-	t1 = time.time()
 	#* Does some screen stuff and updates the sprites
-	exec(level[1])
-	print("PROCESSING ENEMIES: ", 1 / (time.time() - t1), "FPS")
+	#level[1]()
+	parsed()
 	player_group.update(dt)
 	if has_died == True:
 		pygame.quit()
@@ -77,4 +79,3 @@ while RUN:
 	player_group.draw(screen)
 	dt = clock.tick(60) / 1000
 	pygame.display.flip()
-	print("GAME: ", 1 / (time.time() - tprime), "FPS")

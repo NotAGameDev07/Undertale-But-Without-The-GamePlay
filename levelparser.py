@@ -16,7 +16,7 @@ def parse(screen, root=None):
 
 	def addEnemy(px, py, imagepath, velocity, delay, angle, waittime):
 		return f"Enemy(screen, {px}, {py}, \"{imagepath}\", velocity={velocity}, delay={delay}, angle={angle}, waittime={waittime})"
-
+	pstring = pstring + "global dt\n"
 	for i in root:
 		#* Delay tag parsing
 		if i.tag == 'delay':
@@ -24,6 +24,7 @@ def parse(screen, root=None):
 		#* Section tag parsing
 		if i.tag == 'section':
 			count += 1
+			pstring = pstring + f"global essg{count}\n"
 			pstring = pstring + f"essg{count} = pygame.sprite.Group()\n"
 		#* Bullet tag parsing, spawns a bullet
 		if i.tag == 'bullet':
@@ -56,8 +57,16 @@ def parse(screen, root=None):
 						spacing = int(j.attrib['spacing'])
 						for spaces in range(0, int(windowX / spacing)):
 							pstring = pstring + f"essg{count}.add(" + addEnemy((spaces * spacing + int(j.attrib['offset'])) % windowX, int(j.attrib['py']), j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
+	plstring = plstring + "global parsed\n"
 	for i in range(0, count):
-		plstring = plstring + f"essg{i + 1}.update(dt)\n"
-		plstring = plstring + f"essg{i + 1}.draw(screen)\n"
-		plstring = plstring + f"has_died = has_died | player.collides(essg{i + 1})\n"
+		plstring = plstring + f"global essg{i + 1}\n"
+	plstring = plstring + "global has_died\n"
+	plstring = plstring + "def parsed():\n"
+	plstring = plstring + "\tglobal has_died\n"
+	for i in range(0, count):
+		plstring = plstring + f"\tglobal essg{i + 1}\n"
+		plstring = plstring + f"\tessg{i + 1}.update(dt)\n"
+		plstring = plstring + f"\tessg{i + 1}.draw(screen)\n"
+		plstring = plstring + f"\thas_died = has_died | player.collides(essg{i + 1})\n"
+	print(plstring)
 	return pstring, plstring
