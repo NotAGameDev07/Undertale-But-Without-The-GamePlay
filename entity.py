@@ -100,13 +100,9 @@ class Entity(pygame.sprite.Sprite):
 		else:
 			others = []
 			for i in other:
-				if abs(i.px - self.px) < 2 and abs(i.py - self.py) < 2:
+				if abs(i.px - self.px) < 20 and abs(i.py - self.py) < 20:
 					others.append(i)
 		#* Collision with sprite group
 			mask1 = pygame.mask.from_surface(self.image)
-			overlaps = []
-			for i in others:
-				if abs(i.px - self.px) < 2 and abs(i.py - self.py) < 2:
-					overlaps.append(mask1.overlap(pygame.mask.from_surface(i.image), (i.px - self.px, i.py - self.py)))
-			does_overlap = [(i is not None) for i in overlaps]
-			return any(does_overlap), len([i for i in does_overlap if i == True])
+			overlaps = [(mask1.overlap(pygame.mask.from_surface(i.image), (i.px - self.px, i.py - self.py)) != None) for i in others]
+			return any(overlaps)

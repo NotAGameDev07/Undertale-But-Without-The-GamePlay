@@ -7,7 +7,7 @@ from entity import Entity
 
 class Player(Entity):
 	def __init__(self, screen, px, py):
-		self.ivd = 0
+		self.ivd = -10
 		self.hp = len(os.listdir('player'))
 		self.states = ['player/' + i for i in sorted(os.listdir('player'), key=lambda x: int(x[5]))]
 		super().__init__(screen, px, py, self.states[self.hp - 1], self.bounds)
@@ -30,7 +30,7 @@ class Player(Entity):
 		if self.ivd > 0:
 			return False
 		hasCollided = super(Player, self).collides(other)
-		if hasCollided[0] == False:
+		if hasCollided == False:
 			return False
 		if hasCollided == True or hasCollided != None:
 			if self.hp == 0:

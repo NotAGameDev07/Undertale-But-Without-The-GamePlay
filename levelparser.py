@@ -51,12 +51,13 @@ def parse(screen, root=None):
 						spacing = int(j.attrib['spacing'])
 						for spaces in range(0, int(windowY / spacing)):
 							pstring = pstring + f"essg{count}.add(" + addEnemy(int(j.attrib['px']), (spaces * spacing + int(j.attrib['offset'])) % windowY, j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
-					if i.tag == 'bwally':
-						spacing = int(i.attrib['spacing'])
+					if j.tag == 'bwally':
+						j.attrib[i.attrib['prop']] = str(int(j.attrib[i.attrib['prop']]) + int(i.attrib['increment']))
+						spacing = int(j.attrib['spacing'])
 						for spaces in range(0, int(windowX / spacing)):
 							pstring = pstring + f"essg{count}.add(" + addEnemy((spaces * spacing + int(j.attrib['offset'])) % windowX, int(j.attrib['py']), j.attrib['imagepath'], int(j.attrib['velocity']), delay, int(j.attrib['angle']), float(j.attrib['waittime'])) + ")\n"
 	for i in range(0, count):
 		plstring = plstring + f"essg{i + 1}.update(dt)\n"
 		plstring = plstring + f"essg{i + 1}.draw(screen)\n"
-		plstring = plstring + f"has_died = has_died | player.collides(essg{i + 1})"
+		plstring = plstring + f"has_died = has_died | player.collides(essg{i + 1})\n"
 	return pstring, plstring

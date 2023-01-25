@@ -1,7 +1,3 @@
-import math
-
-import pygame
-
 from entity import Entity
 
 
