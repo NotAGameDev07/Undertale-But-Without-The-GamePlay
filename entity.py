@@ -10,7 +10,7 @@ class Entity(pygame.sprite.Sprite):
 		self.px = px
 		self.py = py
 		self.angle = 0
-		self.og_image = pygame.image.load(imagepath)
+		self.og_image = pygame.image.load(imagepath).convert_alpha()
 		self.og_image = pygame.transform.scale(self.og_image, (self.og_image.get_width() * 2, self.og_image.get_height() * 2))
 		self.image = self.og_image
 		self.rect = self.image.get_rect()
@@ -24,7 +24,7 @@ class Entity(pygame.sprite.Sprite):
 	
 	#* Sets image path for the Entity
 	def set_image(self, imagepath):
-		self.og_image = pygame.image.load(imagepath)
+		self.og_image = pygame.image.load(imagepath).convert_alpha()
 		self.og_image = pygame.transform.scale(self.og_image, (self.og_image.get_width() * 2, self.og_image.get_height() * 2))
 		self.useless_angle()
 	
@@ -46,6 +46,12 @@ class Entity(pygame.sprite.Sprite):
 	def set_angle(self, angle):
 		self.angle = angle
 		self.image = pygame.transform.rotate(self.og_image, self.angle)
+		self.rect = self.image.get_rect()
+		self.rect.center = (self.px, self.py)
+	
+	#* Sets the angle of the entity in degrees, self.forward unaffected by angle
+	def set_angle_mu(self, angle):
+		self.image = pygame.transform.rotate(self.og_image, angle)
 		self.rect = self.image.get_rect()
 		self.rect.center = (self.px, self.py)
 	
