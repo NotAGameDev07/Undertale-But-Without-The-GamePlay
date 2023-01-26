@@ -4,14 +4,23 @@ import pygame
 
 
 class Entity(pygame.sprite.Sprite):
-	def __init__(self, screen, px, py, imagepath, boundscheck=None):
+	def __init__(self, screen, px, py, imagepath, boundscheck=None, spx=None, spy=None):
 		super().__init__()
 		self.windowX, self.windowY = screen.get_size()
 		self.px = px
 		self.py = py
 		self.angle = 0
 		self.og_image = pygame.image.load(imagepath).convert_alpha()
-		self.og_image = pygame.transform.scale(self.og_image, (self.og_image.get_width() * 2, self.og_image.get_height() * 2))
+		#* Handles image scaling
+		if spx == None and spy != None:
+			self.og_image = pygame.transform.scale(self.og_image, (self.og_image.get_width() * 2, spy))
+		elif spy == None and spx != None:
+			self.og_image = pygame.transform.scale(self.og_image, (spx, self.og_image.get_height() * 2))
+		elif spx == None and spy == None:
+			self.og_image = pygame.transform.scale(self.og_image, (self.og_image.get_width() * 2, self.og_image.get_height() * 2))
+		elif spx != None and self.spx != None:
+			self.og_image = pygame.transform.scale(self.og_image, (spx, spy))
+		#* End of image scaling handler
 		self.image = self.og_image
 		self.rect = self.image.get_rect()
 		self.rect.center = (px, py)

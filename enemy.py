@@ -2,8 +2,8 @@ from entity import Entity
 
 
 class Enemy(Entity):
-	def __init__(self, screen, px, py, imagepath="bone.png", waittime=3, velocity=0, delay=0, angle=0):
-		super().__init__(screen, px, py, imagepath, self.bounds)
+	def __init__(self, screen, px, py, imagepath="bone.png", waittime=3, velocity=0, delay=0, angle=0, spx=None, spy=None):
+		super().__init__(screen, px, py, imagepath, self.bounds, spx, spy)
 		self.imagepath = imagepath
 		self.waittime = waittime
 		self.canmove = False
