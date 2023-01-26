@@ -29,20 +29,24 @@ SECONDS is the seconds that the bullet waits for before moving
 ### The `<bwallx />` tag spawns a wall of bullets along the Y axis and points a certain direction
 
 ```xml
-<bwallx px=X offset=Y_OFFSET angle=θ spacing=Y_SPACE velocity=VEL imagepath=PATH_TO_IMAGE waittime=SECONDS/>
+<bwallx px=X offset=Y_OFFSET angle=θ spacing=Y_SPACE velocity=VEL imagepath=PATH_TO_IMAGE waittime=SECONDS min=MIN max=MAX/>
 ```
 
-X is the X position of the bullet wall
+X is the X position of the bullet wall, which becomes py=Y with the `<bwally />` tag
 
-Y_OFFSET is the Y offset of the bullet wall
+Y_OFFSET is the Y offset of the bullet wall, which become X_OFFSET, the X offset of the bullet wall with the `<bwally />` tag
 
-Y_SPACE is the Y spacing of the bullet wall
+Y_SPACE is the Y spacing of the bullet wall, which becomes X_SPACE, the X spacing of the bullet wall with the `<bwally />` tag
 
 θ is the angle of the bullet wall
 
 PATH_TO_IMAGE is the path to the image the the bullet wall uses
 
 SECONDS is the seconds that the bullet wall waits for before moving
+
+MIN is the minimum y value and MAX is the maximum y value, y value becomes x value with the `<bwally />` tag
+
+##### NOTE: Use `%XX` (`XX` is a number) for MIN and MAX for percentage of screen size to help avoid window scaling issues
 
 ### `<bwally />` is the same as the previous tag except that the axis they go along is X instead of Y and `py` instead of `px`
 

@@ -52,7 +52,7 @@ pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
 #x.start()
 
 while RUN:
-	F1 = time.time()
+	#F1 = time.time()
 	screen.fill(BG)
 
 	#* Gets keys
@@ -67,10 +67,10 @@ while RUN:
 			lastKey = None
 	if lastKey in [pygame.K_DOWN, pygame.K_UP, pygame.K_LEFT, pygame.K_RIGHT]:
 		player(lastKey)
-	U1 = time.time()
+	#U1 = time.time()
 	#* Does some screen stuff and updates the sprites
 	exec(level[1])
-	print("EPROC:", 1 / (time.time() - U1), "FPS")
+	#print("EPROC:", 1 / (time.time() - U1), "FPS")
 	player_group.update(dt)
 	if has_died == True:
 		pygame.quit()
@@ -79,4 +79,4 @@ while RUN:
 	player_group.draw(screen)
 	dt = clock.tick(60) / 1000
 	pygame.display.flip()
-	print("FPROC", 1 / (time.time() - F1), "FPS")
+	#print("FPROC", 1 / (time.time() - F1), "FPS")
