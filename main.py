@@ -7,7 +7,7 @@ import time
 import pygame
 
 import levelparser
-from bullet import Enemy
+from enemy import Enemy
 from player import Player
 
 current_time = time.time()
